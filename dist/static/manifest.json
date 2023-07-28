@@ -1,0 +1,13 @@
+{
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "name": "试试",
+  "icons": [
+    {
+      "src": "https://tools.huabek.com/common-static/pan-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
