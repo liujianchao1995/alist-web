@@ -42,7 +42,7 @@ const Profile = () => {
         username: ssoID ? me().username : username(),
         password: ssoID ? "" : password(),
         sso_id: me().sso_id,
-      })
+      }),
   )
   const saveMe = async (ssoID?: boolean) => {
     const resp = await save(ssoID)
@@ -90,7 +90,7 @@ const Profile = () => {
                 color="$info9"
                 as={LinkWithBase}
                 href={`/@login?redirect=${encodeURIComponent(
-                  location.pathname
+                  location.pathname,
                 )}`}
               >
                 {t("global.go_login")}
@@ -157,7 +157,7 @@ const Profile = () => {
                   const popup = window.open(
                     url,
                     "authPopup",
-                    "width=500,height=600"
+                    "width=500,height=600",
                   )
                 }}
               >
@@ -178,7 +178,7 @@ const Profile = () => {
           </Show>
         </HStack>
       </Show>
-      <HStack wrap="wrap" gap="$2" mt="$2">
+      {/* <HStack wrap="wrap" gap="$2" mt="$2">
         <For each={UserPermissions}>
           {(item, i) => (
             <PermissionBadge can={UserMethods.can(me(), i())}>
@@ -186,7 +186,7 @@ const Profile = () => {
             </PermissionBadge>
           )}
         </For>
-      </HStack>
+      </HStack> */}
     </VStack>
   )
 }
