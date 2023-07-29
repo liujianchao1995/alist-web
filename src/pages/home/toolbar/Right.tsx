@@ -14,7 +14,7 @@ import { operations } from "./operations"
 import { IoMagnetOutline } from "solid-icons/io"
 import { AiOutlineCloudUpload, AiOutlineSetting } from "solid-icons/ai"
 import { RiSystemRefreshLine } from "solid-icons/ri"
-import { usePath } from "~/hooks"
+import { usePath, useRouter } from "~/hooks"
 import { Motion } from "@motionone/solid"
 
 export const Right = () => {
@@ -26,6 +26,7 @@ export const Right = () => {
   const margin = createMemo(() => (isOpen() ? "$4" : "$5"))
   const isFolder = createMemo(() => objStore.state === State.Folder)
   const { refresh } = usePath()
+  const { to } = useRouter()
   return (
     <Box
       class="left-toolbar-box"
@@ -133,7 +134,7 @@ export const Right = () => {
               as={AiOutlineSetting}
               tips="local_settings"
               onClick={() => {
-                bus.emit("tool", "local_settings")
+                to("/@manage")
               }}
             />
           </VStack>
