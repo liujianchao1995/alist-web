@@ -7,7 +7,7 @@ import reMarkMath from "remark-math"
 import rehypeKatex from "rehype-katex"
 import "./markdown.css"
 import "./katex.css"
-import { Show, onMount } from "solid-js"
+import { onMount } from "solid-js"
 import { clsx } from "clsx"
 
 export const Markdown = (props: { children?: string; class?: string }) => {
@@ -16,13 +16,11 @@ export const Markdown = (props: { children?: string; class?: string }) => {
     window.onMDRender && window.onMDRender()
   })
   return (
-    <Show when={!props.children?.includes("小雅")}>
-      <SolidMarkdown
-        class={clsx("markdown-body", props.class)}
-        remarkPlugins={[remarkGfm, reMarkMath]}
-        rehypePlugins={[rehypeRaw, rehypeKatex]}
-        children={props.children}
-      />
-    </Show>
+    <SolidMarkdown
+      class={clsx("markdown-body", props.class)}
+      remarkPlugins={[remarkGfm, reMarkMath]}
+      rehypePlugins={[rehypeRaw, rehypeKatex]}
+      children={props.children}
+    />
   )
 }

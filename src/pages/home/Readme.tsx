@@ -15,14 +15,14 @@ export const Readme = () => {
       () => {
         if (
           ![State.FetchingMore, State.Folder, State.File].includes(
-            objStore.state
+            objStore.state,
           )
         ) {
           return ""
         }
         if ([State.FetchingMore, State.Folder].includes(objStore.state)) {
           const obj = objStore.objs.find(
-            (item) => item.name.toLowerCase() === "readme.md"
+            (item) => item.name.toLowerCase() === "readme.md",
           )
           if (obj) {
             return proxyLink(obj, true)
@@ -32,8 +32,8 @@ export const Readme = () => {
           return objStore.readme
         }
         return ""
-      }
-    )
+      },
+    ),
   )
   const fetchContent = async (readme: string) => {
     let res = {
@@ -49,7 +49,7 @@ export const Readme = () => {
   }
   const [content] = createResource(readme, fetchContent)
   return (
-    <Show when={readme()}>
+    <Show when={readme() && !content()?.content.includes("小雅")}>
       <Box w="$full" rounded="$xl" p="$4" bgColor={cardBg()} shadow="$lg">
         <MaybeLoading loading={content.loading}>
           <Markdown children={content()?.content} />
