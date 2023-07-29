@@ -4,3 +4,4 @@ node_modules
 !/src/lang/zh-CN/
 .DS_Store
 .idea
+dist
