@@ -144,14 +144,7 @@ export const side_menu_items: SideMenuItem[] = [
   {
     title: "manage.sidemenu.about",
     icon: BsFront,
-    to: "/@manage/about",
-    role: UserRole.GUEST,
-    component: lazy(() => import("./About")),
-  },
-  {
-    title: "manage.sidemenu.docs",
-    icon: FaSolidBook,
-    to: "https://alist.nn.ci",
+    to: "https://www.cnblogs.com/China-Dream/",
     role: UserRole.GUEST,
     external: true,
   },
