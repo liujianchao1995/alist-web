@@ -23,6 +23,7 @@ import { SearchNode } from "~/types"
 import {
   bus,
   fsSearch,
+  fsSearchRemote,
   getFileSize,
   handleResp,
   hoverColor,
@@ -107,18 +108,27 @@ const Search = () => {
   const [keywords, setKeywords] = createSignal("")
   const { pathname } = useRouter()
   const [loading, searchReq] = useFetch(fsSearch)
+  const [loadingRemote, searchReqRemote] = useFetch(fsSearchRemote)
   const [data, setData] = createSignal({
     content: [] as SearchNode[],
     total: 0,
   })
 
   const search = async (page = 1) => {
-    if (loading()) return
+    if (loading() && loadingRemote()) return
     setData({
       content: [],
       total: 0,
     })
     const resp = await searchReq(pathname(), keywords(), password(), page)
+    const respRemote = await searchReqRemote(
+      pathname(),
+      keywords(),
+      password(),
+      page,
+    )
+    resp.data.content = [...resp.data.content, ...respRemote.data.content]
+    resp.data.total = resp.data.total + respRemote.data.total
     handleResp(resp, (data) => {
       const content = data.content
       if (!content) {
@@ -174,12 +184,12 @@ const Search = () => {
                 aria-label="search"
                 icon={<BsSearch />}
                 onClick={() => search()}
-                loading={loading()}
+                loading={loading() && loadingRemote()}
                 disabled={keywords().length === 0}
               />
             </HStack>
             <Switch>
-              <Match when={loading()}>
+              <Match when={loading() && loadingRemote()}>
                 <FullLoading />
               </Match>
               <Match when={data().content.length === 0}>
