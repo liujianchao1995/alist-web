@@ -26,4 +26,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: chinesedream/alist:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/alist:latest

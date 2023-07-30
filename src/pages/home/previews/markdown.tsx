@@ -13,11 +13,9 @@ const MdPreview = () => {
     return content
   }
   return (
-    <Show when={content()?.content && !content()?.content.includes("小雅")}>
-      <MaybeLoading loading={content.loading}>
-        <Markdown children={convertToMd(content()?.content ?? "")} />
-      </MaybeLoading>
-    </Show>
+    <MaybeLoading loading={content.loading}>
+      <Markdown children={convertToMd(content()?.content ?? "")} />
+    </MaybeLoading>
   )
 }
 
