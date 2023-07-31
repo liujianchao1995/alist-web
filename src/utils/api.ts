@@ -1,5 +1,4 @@
 import axios, { CancelToken } from "axios"
-import { api } from "."
 import {
   PEmptyResp,
   FsGetResp,
