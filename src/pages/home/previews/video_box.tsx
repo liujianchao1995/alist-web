@@ -7,7 +7,7 @@ import {
   HStack,
   Switch,
 } from "@hope-ui/solid"
-import { For, JSXElement } from "solid-js"
+import { For, JSXElement, Show } from "solid-js"
 import { useRouter, useLink, useT } from "~/hooks"
 import { objStore } from "~/store"
 import { ObjType } from "~/types"
@@ -77,37 +77,39 @@ export const VideoBox = (props: {
             props.onAutoNextChange(e.currentTarget.checked)
             localStorage.setItem(
               "video_auto_next",
-              e.currentTarget.checked.toString()
+              e.currentTarget.checked.toString(),
             )
           }}
         >
           {t("home.preview.auto_next")}
         </Switch>
       </HStack>
-      <Flex wrap="wrap" gap="$1" justifyContent="center">
-        <For each={players}>
-          {(item) => {
-            return (
-              <Tooltip placement="top" withArrow label={item.name}>
-                <Anchor
-                  // external
-                  href={convertURL(item.scheme, {
-                    raw_url: objStore.raw_url,
-                    name: objStore.obj.name,
-                    d_url: currentObjLink(true),
-                  })}
-                >
-                  <Image
-                    m="0 auto"
-                    boxSize="$8"
-                    src={`${window.__dynamic_base__}/images/${item.icon}.webp`}
-                  />
-                </Anchor>
-              </Tooltip>
-            )
-          }}
-        </For>
-      </Flex>
+      <Show when={false}>
+        <Flex wrap="wrap" gap="$1" justifyContent="center">
+          <For each={players}>
+            {(item) => {
+              return (
+                <Tooltip placement="top" withArrow label={item.name}>
+                  <Anchor
+                    // external
+                    href={convertURL(item.scheme, {
+                      raw_url: objStore.raw_url,
+                      name: objStore.obj.name,
+                      d_url: currentObjLink(true),
+                    })}
+                  >
+                    <Image
+                      m="0 auto"
+                      boxSize="$8"
+                      src={`${window.__dynamic_base__}/images/${item.icon}.webp`}
+                    />
+                  </Anchor>
+                </Tooltip>
+              )
+            }}
+          </For>
+        </Flex>
+      </Show>
     </VStack>
   )
 }

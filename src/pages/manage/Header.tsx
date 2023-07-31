@@ -15,7 +15,7 @@ import {
   useColorModeValue,
 } from "@hope-ui/solid"
 import { TiThMenu } from "solid-icons/ti"
-import { IoExit } from "solid-icons/io"
+import { IoExit, IoHome } from "solid-icons/io"
 import { SwitchColorMode, SwitchLanguageWhite } from "~/components"
 import { useRouter, useT } from "~/hooks"
 import { SideMenu } from "./SideMenu"
@@ -63,11 +63,23 @@ const Header = () => {
         <HStack spacing="$1">
           <IconButton
             aria-label="logout"
+            title="退出"
+            colorScheme="warning"
             icon={<IoExit />}
             onClick={() => {
               changeToken()
               notify.success(t("manage.logout_success"))
               to(`/@login?redirect=${encodeURIComponent(location.pathname)}`)
+            }}
+            size="sm"
+          />
+          <IconButton
+            marginLeft="$3"
+            title="首页"
+            aria-label="home"
+            icon={<IoHome />}
+            onClick={() => {
+              to(`/`)
             }}
             size="sm"
           />

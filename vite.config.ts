@@ -5,6 +5,9 @@ import legacy from "@vitejs/plugin-legacy"
 import { dynamicBase } from "vite-plugin-dynamic-base"
 
 export default defineConfig({
+  css: {
+    devSourcemap: true,
+  },
   resolve: {
     alias: {
       "~": path.resolve(__dirname, "src"),
@@ -40,7 +43,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://localhost:5244",
+        target: "https://pan.huabek.com/",
         changeOrigin: true,
         // rewrite: (path) => path.replace(/^\/api/, ""),
       },

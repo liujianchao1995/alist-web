@@ -115,20 +115,26 @@ const Search = () => {
   })
 
   const search = async (page = 1) => {
-    if (loading() && loadingRemote()) return
+    if (loading() || loadingRemote()) return
     setData({
       content: [],
       total: 0,
     })
     const resp = await searchReq(pathname(), keywords(), password(), page)
-    const respRemote = await searchReqRemote(
-      pathname(),
-      keywords(),
-      password(),
-      page,
-    )
-    resp.data.content = [...resp.data.content, ...respRemote.data.content]
-    resp.data.total = resp.data.total + respRemote.data.total
+    try {
+      const respRemote = await searchReqRemote(
+        pathname(),
+        keywords(),
+        password(),
+        page,
+      )
+
+      resp.data.content = [...resp.data.content, ...respRemote.data.content]
+      resp.data.total = resp.data.total + respRemote.data.total
+    } catch (err) {
+      console.error(err)
+    }
+
     handleResp(resp, (data) => {
       const content = data.content
       if (!content) {
@@ -184,12 +190,12 @@ const Search = () => {
                 aria-label="search"
                 icon={<BsSearch />}
                 onClick={() => search()}
-                loading={loading() && loadingRemote()}
+                loading={loading() || loadingRemote()}
                 disabled={keywords().length === 0}
               />
             </HStack>
             <Switch>
-              <Match when={loading() && loadingRemote()}>
+              <Match when={loading() || loadingRemote()}>
                 <FullLoading />
               </Match>
               <Match when={data().content.length === 0}>

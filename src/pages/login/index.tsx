@@ -10,10 +10,13 @@ import {
   HStack,
   VStack,
   Checkbox,
+  InputGroup,
+  InputRightElement,
 } from "@hope-ui/solid"
 import { createMemo, createSignal, Show } from "solid-js"
 import { SwitchColorMode, SwitchLanguageWhite } from "~/components"
 import { useFetch, useT, useTitle, useRouter } from "~/hooks"
+import {} from "solid-icons/ai"
 import {
   changeToken,
   r,
@@ -26,6 +29,7 @@ import LoginBg from "./LoginBg"
 import { createStorageSignal } from "@solid-primitives/storage"
 import { getSetting } from "~/store"
 import { SSOLogin } from "./SSOLogin"
+import { FiEye, FiEyeOff } from "solid-icons/fi"
 
 const Login = () => {
   const logos = getSetting("logo").split("\n")
@@ -79,11 +83,13 @@ const Login = () => {
     )
   }
   const [needOpt, setNeedOpt] = createSignal(false)
+  const [showPwd, setShowPwd] = createSignal(false)
 
   return (
     <Center zIndex="1" w="$full" h="100vh">
       <VStack
         bgColor={bgColor()}
+        userSelect="none"
         rounded="$xl"
         p="24px"
         w={{
@@ -107,11 +113,7 @@ const Login = () => {
               placeholder={t("login.otp-tips")}
               value={opt()}
               onInput={(e) => setOpt(e.currentTarget.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  Login()
-                }
-              }}
+              onKeyDown={(e) => e.key === "Enter" && Login()}
             />
           }
         >
@@ -119,20 +121,28 @@ const Login = () => {
             name="username"
             placeholder={t("login.username-tips")}
             value={username()}
+            variant="filled"
             onInput={(e) => setUsername(e.currentTarget.value)}
           />
-          <Input
-            name="password"
-            placeholder={t("login.password-tips")}
-            type="password"
-            value={password()}
-            onInput={(e) => setPassword(e.currentTarget.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                Login()
-              }
-            }}
-          />
+          <InputGroup>
+            <Input
+              name="password"
+              placeholder={t("login.password-tips")}
+              type={showPwd() ? "text" : "password"}
+              variant="filled"
+              value={password()}
+              onInput={(e) => setPassword(e.currentTarget.value)}
+              onKeyDown={(e) => e.key === "Enter" && Login()}
+            />
+            <InputRightElement
+              cursor="pointer"
+              onclick={() => setShowPwd(!showPwd())}
+            >
+              <Show when={showPwd()} fallback={() => <FiEyeOff />}>
+                <FiEye />
+              </Show>
+            </InputRightElement>
+          </InputGroup>
           <Flex
             px="$1"
             w="$full"
@@ -178,10 +188,7 @@ const Login = () => {
           colorScheme="accent"
           onClick={() => {
             changeToken()
-            to(
-              decodeURIComponent(searchParams.redirect || base_path || "/"),
-              true,
-            )
+            to(decodeURIComponent(base_path || "/"), true)
           }}
         >
           {t("login.use_guest")}

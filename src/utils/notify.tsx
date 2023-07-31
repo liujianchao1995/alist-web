@@ -1,6 +1,8 @@
 import {
   Box,
+  Button,
   CloseButton,
+  IconButton,
   // Alert,
   // AlertDescription,
   // AlertIcon,
@@ -10,6 +12,7 @@ import {
 } from "@hope-ui/solid"
 import { JSXElement } from "solid-js"
 import { alphaBgColor, firstUpperCase } from "."
+import { AiOutlineCloseCircle } from "solid-icons/ai"
 
 const notify = {
   render: (element: JSXElement) => {
@@ -25,11 +28,15 @@ const notify = {
             shadow="$md"
             rounded="$lg"
             p="$3"
+            pr="$8"
           >
-            <CloseButton
+            <IconButton
+              aria-label="close"
+              variant="ghost"
               pos="absolute"
               right="$2"
-              top="$2"
+              size="xs"
+              icon={<AiOutlineCloseCircle />}
               onClick={props.close}
             />
             {element}

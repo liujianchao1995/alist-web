@@ -75,6 +75,7 @@ const Profile = () => {
           <>
             <Alert
               status="warning"
+              w="$full"
               flexDirection={{
                 "@initial": "column",
                 "@lg": "row",

@@ -165,7 +165,7 @@ export const fsSearchRemote = async (
   page = 1,
   per_page = 100,
 ): Promise<FsSearchResp> => {
-  return r.post("https://dev.huabek.com/search", {
+  return r.post(import.meta.env.VITE_SEARCH_API, {
     parent,
     keywords,
     page,

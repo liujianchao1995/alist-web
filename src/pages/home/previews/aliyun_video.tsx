@@ -63,7 +63,7 @@ const Preview = () => {
     pip: true,
     mutex: true,
     fullscreen: true,
-    fullscreenWeb: true,
+    fullscreenWeb: false,
     subtitleOffset: true,
     miniProgressBar: false,
     playsInline: true,
@@ -145,14 +145,14 @@ const Preview = () => {
         path: pathname(),
         password: password(),
         method: "video_preview",
-      })
+      }),
   )
   onMount(async () => {
     const resp = await post()
     handleResp(resp, (data) => {
       const list =
         data.video_preview_play_info.live_transcoding_task_list.filter(
-          (l) => l.url
+          (l) => l.url,
         )
       if (list.length === 0) {
         notify.error("No transcoding video found")

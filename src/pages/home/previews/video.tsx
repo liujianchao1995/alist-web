@@ -38,7 +38,7 @@ const Preview = () => {
     pip: true,
     mutex: true,
     fullscreen: true,
-    fullscreenWeb: true,
+    fullscreenWeb: false,
     subtitleOffset: true,
     miniProgressBar: false,
     playsInline: true,
@@ -64,7 +64,7 @@ const Preview = () => {
             type: "flv",
             url: url,
           },
-          { referrerPolicy: "same-origin" }
+          { referrerPolicy: "same-origin" },
         )
         flvPlayer.attachMediaElement(video)
         flvPlayer.load()

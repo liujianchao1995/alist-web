@@ -148,11 +148,4 @@ export const side_menu_items: SideMenuItem[] = [
     role: UserRole.GUEST,
     external: true,
   },
-  {
-    title: "manage.sidemenu.home",
-    icon: IoHome,
-    to: "/",
-    role: UserRole.GUEST,
-    refresh: true,
-  },
 ]

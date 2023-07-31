@@ -49,12 +49,14 @@ export const Readme = () => {
   }
   const [content] = createResource(readme, fetchContent)
   return (
-    <Show when={readme() && !content()?.content.includes("小雅")}>
-      <Box w="$full" rounded="$xl" p="$4" bgColor={cardBg()} shadow="$lg">
-        <MaybeLoading loading={content.loading}>
-          <Markdown children={content()?.content} />
-        </MaybeLoading>
-      </Box>
+    <Show when={readme()}>
+      <MaybeLoading loading={content.loading}>
+        <Show when={!content()?.content.includes("小雅")}>
+          <Box w="$full" rounded="$xl" p="$4" bgColor={cardBg()} shadow="$lg">
+            <Markdown children={content()?.content} />
+          </Box>
+        </Show>
+      </MaybeLoading>
     </Show>
   )
 }

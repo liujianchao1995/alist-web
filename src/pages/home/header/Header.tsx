@@ -3,17 +3,15 @@ import {
   useColorModeValue,
   Image,
   Center,
-  Icon,
-  Kbd,
+  IconButton,
 } from "@hope-ui/solid"
 import { Show } from "solid-js"
 import { getSetting, objStore, State } from "~/store"
-import { BsSearch } from "solid-icons/bs"
 import { CenterLoading } from "~/components"
 import { Container } from "../Container"
 import { bus } from "~/utils"
 import { Layout } from "./layout"
-import { isMac } from "~/utils/compatibility"
+import { FiSearch } from "solid-icons/fi"
 
 export const Header = () => {
   const logos = getSetting("logo").split("\n")
@@ -42,27 +40,13 @@ export const Header = () => {
           <HStack class="header-right" spacing="$2">
             <Show when={objStore.state === State.Folder}>
               <Show when={getSetting("search_index") !== "none"}>
-                <HStack
-                  bg="$neutral4"
-                  w="$32"
-                  p="$2"
-                  rounded="$md"
-                  justifyContent="space-between"
-                  border="2px solid transparent"
-                  cursor="pointer"
-                  _hover={{
-                    borderColor: "$info6",
-                  }}
+                <IconButton
+                  aria-label=""
+                  icon={<FiSearch />}
                   onClick={() => {
                     bus.emit("tool", "search")
                   }}
-                >
-                  <Icon as={BsSearch} />
-                  <HStack>
-                    {isMac ? <Kbd>Cmd</Kbd> : <Kbd>Ctrl</Kbd>}
-                    <Kbd>K</Kbd>
-                  </HStack>
-                </HStack>
+                />
               </Show>
               <Layout />
             </Show>
