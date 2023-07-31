@@ -1,6 +1,7 @@
 {
   "obj": {
     "name": "Name",
+    "type": "Type",
     "size": "Size",
     "modified": "Modified"
   },

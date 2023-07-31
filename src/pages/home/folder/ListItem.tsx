@@ -17,14 +17,19 @@ import { getIconByObj } from "~/utils/icon"
 
 export interface Col {
   name: OrderBy
-  textAlign: "left" | "right"
+  textAlign: "left" | "right" | "center"
   w: any
 }
 
 export const cols: Col[] = [
-  { name: "name", textAlign: "left", w: { "@initial": "76%", "@md": "50%" } },
-  { name: "size", textAlign: "right", w: { "@initial": "24%", "@md": "17%" } },
-  { name: "modified", textAlign: "right", w: { "@initial": 0, "@md": "33%" } },
+  { name: "name", textAlign: "left", w: { "@initial": "50%", "@md": "50%" } },
+  { name: "type", textAlign: "center", w: { "@initial": "25%", "@md": "12%" } },
+  { name: "size", textAlign: "right", w: { "@initial": "25%", "@md": "12%" } },
+  {
+    name: "modified",
+    textAlign: "right",
+    w: { "@initial": "0%", "@md": "26%" },
+  },
 ]
 
 export const ListItem = (props: { obj: StoreObj; index: number }) => {
@@ -34,6 +39,7 @@ export const ListItem = (props: { obj: StoreObj; index: number }) => {
   }
   const { setPathAs } = usePath()
   const { show } = useContextMenu({ id: 1 })
+  console.log(props.obj)
   return (
     <Motion.div
       initial={{ opacity: 0, scale: 0.95 }}
@@ -110,14 +116,19 @@ export const ListItem = (props: { obj: StoreObj; index: number }) => {
             {props.obj.name}
           </Text>
         </HStack>
-        <Text class="size" w={cols[1].w} textAlign={cols[1].textAlign as any}>
+        <Text class="type" w={cols[1].w} textAlign={cols[1].textAlign as any}>
+          {!props.obj.is_dir
+            ? props.obj.name.substring(props.obj.name.lastIndexOf(".") + 1)
+            : "-"}
+        </Text>
+        <Text class="size" w={cols[2].w} textAlign={cols[2].textAlign as any}>
           {getFileSize(props.obj.size)}
         </Text>
         <Text
           class="modified"
           display={{ "@initial": "none", "@md": "inline" }}
-          w={cols[2].w}
-          textAlign={cols[2].textAlign as any}
+          w={cols[3].w}
+          textAlign={cols[3].textAlign as any}
         >
           {formatDate(props.obj.modified)}
         </Text>
