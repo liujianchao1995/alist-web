@@ -1,4 +1,5 @@
 import axios, { CancelToken } from "axios"
+import { api } from "."
 import {
   PEmptyResp,
   FsGetResp,
@@ -165,7 +166,7 @@ export const fsSearchRemote = async (
   page = 1,
   per_page = 100,
 ): Promise<FsSearchResp> => {
-  return r.post(import.meta.env.VITE_SEARCH_API, {
+  return r.post(`/search`, {
     parent,
     keywords,
     page,
