@@ -39,7 +39,6 @@ export const ListItem = (props: { obj: StoreObj; index: number }) => {
   }
   const { setPathAs } = usePath()
   const { show } = useContextMenu({ id: 1 })
-  console.log(props.obj)
   return (
     <Motion.div
       initial={{ opacity: 0, scale: 0.95 }}
