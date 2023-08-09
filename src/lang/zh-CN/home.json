@@ -1,7 +1,6 @@
 {
   "obj": {
     "name": "名称",
-    "type": "类型",
     "size": "大小",
     "modified": "修改时间"
   },
@@ -14,7 +13,7 @@
     "tr-install": "TrollStore",
     "tr-installing": "TrollStore 正在安装",
     "open_in_new_window": "在新窗口中打开",
-    "auto_next": "自动连播"
+    "auto_next": "自动下一个"
   },
   "layouts": {
     "list": "列表视图",
@@ -93,13 +92,13 @@
     "aria2_rpc_url": "Aria2 RPC 链接",
     "aria2_rpc_secret": "Aria2 RPC 密钥",
     "aria2_dir": "Aria2 下载目录",
-    "show_folder_in_image_view": "Show folder in image view",
+    "show_folder_in_image_view": "在图像视图中显示文件夹",
     "show_folder_in_image_view_options": {
-      "top": "Top",
-      "bottom": "Bottom",
+      "top": "上方",
+      "bottom": "下方",
       "none": "无"
     },
-    "global_default_layout": "Global default layout",
+    "global_default_layout": "全局默认布局",
     "global_default_layout_options": {
       "list": "列表视图",
       "grid": "网格视图",
@@ -121,7 +120,12 @@
   },
   "search": {
     "search": "搜索",
-    "no_result": "暂无结果"
+    "no_result": "暂无结果",
+    "scopes": {
+      "all": "全部",
+      "folder": "文件夹",
+      "file": "文件"
+    }
   },
   "fetching_settings_failed": "获取设置失败： ",
   "get_current_user_failed": "获取当前用户失败： ",
