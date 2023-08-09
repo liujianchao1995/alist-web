@@ -20,9 +20,13 @@ const notify = {
       render: (props) => {
         return (
           <Box
-            class="notify-render"
             css={{
+              display: "flex",
               backdropFilter: "blur(8px)",
+              backgroundColor: alphaBgColor(),
+              boxShadow: "$md",
+              borderRadius: "$lg",
+              padding: "$3",
             }}
             bgColor={alphaBgColor()}
             shadow="$md"
