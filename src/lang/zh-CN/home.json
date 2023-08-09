@@ -1,6 +1,7 @@
 {
   "obj": {
     "name": "名称",
+    "type": "类型",
     "size": "大小",
     "modified": "修改时间"
   },
@@ -13,7 +14,7 @@
     "tr-install": "TrollStore",
     "tr-installing": "TrollStore 正在安装",
     "open_in_new_window": "在新窗口中打开",
-    "auto_next": "自动下一个"
+    "auto_next": "自动连播"
   },
   "layouts": {
     "list": "列表视图",
@@ -123,7 +124,7 @@
     "no_result": "暂无结果",
     "scopes": {
       "all": "全部",
-      "folder": "文件夹",
+      "folder": "目录",
       "file": "文件"
     }
   },

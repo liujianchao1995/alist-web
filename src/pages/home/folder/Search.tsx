@@ -46,6 +46,7 @@ import {
 } from "~/utils"
 import { isMac } from "~/utils/compatibility"
 import { getIconByObj } from "~/utils/icon"
+import { type } from "os"
 
 // class MarkKeywords {
 //   root
@@ -210,12 +211,27 @@ const Search = () => {
   const [scope, setScope] = createSignal(0)
   const scopes = ["all", "folder", "file"]
 
+  const [fileType, setFileType] = createSignal("video")
+  const fileTypes = [
+    { title: "全部", type: "all" },
+    { title: "影视", type: "video" },
+    { title: "音乐", type: "music" },
+    { title: "书籍", type: "ebook" },
+  ]
+
+  const [searchType, setSearchType] = createSignal("local")
+  const searchTypes = [
+    { title: "本地", type: "local" },
+    { title: "远程", type: "remote" },
+  ]
+
   const search = async (page = 1) => {
     if (loading() || loadingRemote()) return
     setData({
       content: [],
       total: 0,
     })
+
     const resp = await searchReq(
       pathname(),
       keywords(),
@@ -229,7 +245,7 @@ const Search = () => {
         pathname(),
         keywords(),
         password(),
-        scope(),
+        fileType(),
         page,
         pageSize,
       )
@@ -281,13 +297,38 @@ const Search = () => {
             <HStack w="$full" spacing="$2">
               <SelectWrapper
                 w="$32"
-                value={scope()}
-                onChange={(v) => setScope(v)}
-                options={scopes.map((v, i) => ({
-                  value: i,
-                  label: t(`home.search.scopes.${v}`),
+                value={searchType()}
+                onChange={(v) => setSearchType(v)}
+                options={searchTypes.map((v) => ({
+                  value: v.type,
+                  label: v.title,
                 }))}
               />
+              <Show
+                when={searchType() == "remote"}
+                fallback={
+                  <SelectWrapper
+                    w="$32"
+                    value={scope()}
+                    onChange={(v) => setScope(v)}
+                    options={scopes.map((v, i) => ({
+                      value: i,
+                      label: t(`home.search.scopes.${v}`),
+                    }))}
+                  />
+                }
+              >
+                <SelectWrapper
+                  w="$32"
+                  value={fileType()}
+                  onChange={(v) => setFileType(v)}
+                  options={fileTypes.map((v) => ({
+                    value: v.type,
+                    label: v.title,
+                  }))}
+                />
+              </Show>
+
               <Input
                 id="search-input"
                 value={keywords()}

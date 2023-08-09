@@ -164,12 +164,14 @@ export const fsSearchRemote = async (
   parent: string,
   keywords: string,
   password = "",
+  fileType: "all" | "video" | "music" | "ebook",
   page = 1,
   per_page = 100,
 ): Promise<FsSearchResp> => {
-  return r.post(`/search`, {
+  return r.post(`/alist/search`, {
     parent,
     keywords,
+    fileType,
     page,
     per_page,
     password,
